@@ -1,14 +1,17 @@
 {
     "manifest_version": 3,
-    "name": "YouTube Shorts Remover",
-    "version": "1.0",
-    "description": "Removes YouTube Shorts sections from the feed",
-    "permissions": ["activeTab"],
+    "name": "YouTube Shorts Remover+",
+    "version": "1.1",
+    "description": "Removes YouTube Shorts from all sections and blocks Shorts pages",
+    "permissions": ["webNavigation"],
     "content_scripts": [
       {
         "matches": ["*://*.youtube.com/*"],
         "js": ["content.js"],
-        "run_at": "document_end"
+        "run_at": "document_start"
       }
-    ]
+    ],
+    "background": {
+      "service_worker": "background.js"
+    }
   }
