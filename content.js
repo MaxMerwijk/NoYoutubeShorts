@@ -1,12 +1,20 @@
 
 function removeShortsElements() {
-    document.querySelectorAll('ytd-rich-shelf-renderer[is-shorts]').forEach(e => e.remove());
-    
+    document.querySelectorAll('ytd-rich-shelf-renderer[is-shorts], ytd-reel-shelf-renderer').forEach(e => {
+        if (e.tagName === 'YTD-REEL-SHELF-RENDERER') {
+            const title = e.querySelector('#title');
+            if (title?.textContent?.trim() === 'Shorts') e.remove();
+        } else {
+            e.remove();
+        }
+    });
+
     document.querySelectorAll('ytd-guide-entry-renderer a[title="Shorts"]').forEach(e => {
         const entry = e.closest('ytd-guide-entry-renderer');
         entry?.remove();
     });
 }
+
 
 function blockShortsPage() {
     if (window.location.pathname.includes('/shorts/')) {
